@@ -1,0 +1,52 @@
+{
+    "products":[
+        {
+            "_id":"1",
+            "title":"A dress for spring",
+            "image":"/images/dress1.jpg",
+            "description":"This is for all latest trends",
+            "sizes":["XL","XXL","M"],
+            "price":20.5
+        },
+        {
+            "_id":"2",
+            "title":"A dress for summer",
+            "image":"/images/dress2.jpg",
+            "description":"This is for all latest trends",
+            "sizes":["S","XXL"],
+            "price":18.99
+        },
+        {
+            "_id":"3",
+            "title":"A dress for fall",
+            "image":"/images/dress3.jpg",
+            "description":"This is for all latest trends",
+            "sizes":["S","SX","M"],
+            "price":15.50
+        },
+        {
+            "_id":"4",
+            "title":"A dress for spring",
+            "image":"/images/dress4.jpg",
+            "description":"This is for all latest trends",
+            "sizes":["XL","XXL"],
+            "price":25.25
+        },
+        {
+            "_id":"5",
+            "title":"A dress for winter",
+            "image":"/images/dress5.jpg",
+            "description":"This is for all latest trends",
+            "sizes":["XL","XXL","M","S"],
+            "price":29.9
+        },
+        {
+            "_id":"6",
+            "title":"A dress for winter",
+            "image":"/images/dress6.jpg",
+            "description":"This is for all latest trends",
+            "sizes":["M","S"],
+            "price":22.60
+        }
+    ]
+}
