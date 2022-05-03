@@ -1,13 +1,13 @@
 import './filter.scss';
 
-const Filter = ({count,size,order,filterSize}) => {
+const Filter = ({count,size,order,filterSize,sortProducts}) => {
     return ( 
         <div className="filter">
             <div className="filter-result">{count} Products</div>
             <div className="filter-sort">
                 Order{' '}
-                <select name="" id="">
-                    <option value="">Latest</option>
+                <select name="" id="" value={order} onChange={sortProducts}>
+                    <option value="latest">Latest</option>
                     <option value="lowest">Lowest</option>
                     <option value="highest">Highest</option>
                 </select>

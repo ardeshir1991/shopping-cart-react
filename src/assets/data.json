@@ -13,7 +13,7 @@
             "title":"A dress for summer",
             "image":"/images/dress2.jpg",
             "description":"This is for all latest trends",
-            "sizes":["S","XXL"],
+            "sizes":["S","XXL","L"],
             "price":18.99
         },
         {
