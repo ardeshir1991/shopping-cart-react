@@ -32,21 +32,21 @@
                 display: block;
                 padding: 5px 0;
             }
+            button{
+                background-color: $buttonPrimary;
+                border-radius: 10px;
+                cursor: pointer;
+                border: none;
+                font-size: 1rem;
+                padding: 5px 10px;
+                font-weight: bold;
+            }
+            button:hover{
+                background-color: #e74c3c;
+                color: white;
+            }
         }
-        button{
-            margin-left: auto;
-            background-color: $buttonPrimary;
-            border-radius: 10px;
-            cursor: pointer;
-            border: none;
-            font-size: 1rem;
-            padding: 5px 10px;
-            font-weight: bold;
-        }
-        button:hover{
-            background-color: #e74c3c;
-            color: white;
-        }
+        
     }
     .total-proceed{
         display: flex;

@@ -5,7 +5,7 @@ const Cart = ({cartItems, removeCart}) => {
     return ( 
         <div className='cart-container'>
             <p className="cart-header">
-                {cartItems.length == 0 ? 'Cart Is Empty' : `The number of items in your cart is ${cartItems.length} `}
+                {cartItems.length === 0 ? 'Cart Is Empty' : `The number of items in your cart is ${cartItems.length} `}
             </p>
                 {
                     cartItems.map((item,i)=>{
@@ -17,8 +17,8 @@ const Cart = ({cartItems, removeCart}) => {
                                     <p className='count'>count: {item.count}</p>
                                     <p className='price'>price: {currencyFormat(item.price)}</p>
                                     <span>Total: {currencyFormat((item.count)*(item.price))}</span>
+                                    <button onClick={()=>removeCart(item)}>Remove</button>
                                 </div>
-                                <button onClick={()=>removeCart(item)}>Remove</button>
                             </div>
                         )
                     })
