@@ -1,10 +1,13 @@
+@import './../../variables';
+
 .filter{
     display: flex;
     margin: 10px;
-    padding: 10px;
+    padding: 11px;
     justify-content: space-between;
     width: 100%;
     font-size: 1.5rem;
+    border-bottom: 1px solid $buttonBorderColor;
     .filter-sort, .filter-size{
         select{
             border-radius: 5px;
