@@ -1,14 +1,14 @@
 import './Products.scss';
-import useCurrencyFormat from '../../hooks/currencyFormat';
+import currencyFormat from '../../hooks/currencyFormat';
 
-const Product = ({product}) => {
+const Product = ({product,addToCart}) => {
     return ( 
         <div className='product'>
             <img src={product.image} alt="" />
             <p>{product.title}</p>
             <div>
-                <span>{useCurrencyFormat(product.price)}</span>
-                <button>Add To Cart</button>
+                <span>{currencyFormat(product.price)}</span>
+                <button onClick={()=>addToCart(product)}>Add To Cart</button>
             </div>
         </div>
      );
