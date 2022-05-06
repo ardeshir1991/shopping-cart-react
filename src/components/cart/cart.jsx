@@ -1,7 +1,28 @@
 import './cart.scss';
 import currencyFormat from '../../hooks/currencyFormat';
+import { useState } from 'react';
+import useForm from '../../hooks/useForm';
 
 const Cart = ({cartItems, removeCart}) => {
+    const [showCheckout, setShowCheckout] = useState(false);
+    const {values, handleChange, submitHandler} = useForm(cartItems);
+
+    // const inputHandler = (e)=>{
+    //     setFormInfo(values => ({...values,[e.target.name]: e.target.value}));
+    // }
+
+    // const createOrderHandler = (e)=>{
+    //     e.preventDefault();
+    //     const order = {
+    //         email:values.email,
+    //         name: values.name,
+    //         address: values.address,
+    //         cartItems
+    //     };
+    //     createOrder(order);
+    //     // alert('Your order under name of '+ order.name);
+    // }
+
     return ( 
         <div className='cart-container'>
             <p className="cart-header">
@@ -27,8 +48,23 @@ const Cart = ({cartItems, removeCart}) => {
                     cartItems.length !== 0 && (
                         <div className="total-proceed">
                             <span>Total Purchase: {currencyFormat(cartItems.reduce((total,num)=> total + num.price * num.count, 0))}</span>
-                            <button>Proceed</button>
+                            <button onClick={()=>setShowCheckout(true)}>Proceed</button>
                         </div> 
+                    )
+                }
+                {
+                    showCheckout && (
+                        <div className="form-container">
+                            <form action="" onSubmit={submitHandler}>
+                                <label htmlFor="">Email:</label>
+                                <input type="email" name="email" id="" required value={values.email || ''} onChange={handleChange}/>
+                                <label htmlFor="">Name:</label>
+                                <input type="text" name="name" id="" required value={values.name || ''} onChange={handleChange}/>
+                                <label htmlFor="">Address:</label>
+                                <input type="text" name="address" id="" required value={values.address || ''} onChange={handleChange}/>
+                                <input type="submit" value="Checkout" className='submit'/>
+                            </form>
+                        </div>
                     )
                 }
         </div>
