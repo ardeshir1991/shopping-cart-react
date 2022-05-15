@@ -22,7 +22,7 @@ const useForm = ({cartItems}) => {
             address:values.address,
             cartItems
         }
-        alert('The order has been submitted under the name of '+order.name);
+        alert('The order has been submitted under the name of '+ order.name);
         setValues({
             name:'',
             email:'',
