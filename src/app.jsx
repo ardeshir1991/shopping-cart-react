@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Product from './components/products/Products';
 import Filter from './components/filter/filter';
 import Cart from './components/cart/cart';
+import 'animate.css';
 
 const App = () => {
     const [products, setProduct] = useState(data.products);
@@ -73,15 +74,17 @@ const App = () => {
                         size={size}
                         filterSize={filterSizeHandler}
                         sortProducts={sortHandler} order={sort}/>
-
+                        
                         <div className='products-container'>
                         {
                             products.map((product,index)=>(
+                                
                                 <Product product={product} key={index} addToCart={addToCart}/>
+                                
                             ))
                         }
                         </div>
-                        
+
                     </div>
                     <div className="sidebar">
                         <Cart cartItems={cartItems} removeCart={removeCart} createOrderHandler={createOrder}/>

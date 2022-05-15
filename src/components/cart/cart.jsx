@@ -2,6 +2,7 @@ import './cart.scss';
 import currencyFormat from '../../hooks/currencyFormat';
 import { useState } from 'react';
 import useForm from '../../hooks/useForm';
+import 'animate.css';
 
 const Cart = ({cartItems, removeCart}) => {
     const [showCheckout, setShowCheckout] = useState(false);
@@ -31,7 +32,7 @@ const Cart = ({cartItems, removeCart}) => {
                 {
                     cartItems.map((item,i)=>{
                         return(
-                            <div className="item" key={i}>
+                            <div className="item animate__animated animate__fadeInLeft" key={i}>
                                 <img src={item.image} alt="" />
                                 <div>
                                     <p>{item.title}</p>
@@ -46,7 +47,7 @@ const Cart = ({cartItems, removeCart}) => {
                 }
                 {
                     cartItems.length !== 0 && (
-                        <div className="total-proceed">
+                        <div className="total-proceed animate__animated animate__fadeInRight">
                             <span>Total Purchase: {currencyFormat(cartItems.reduce((total,num)=> total + num.price * num.count, 0))}</span>
                             <button onClick={()=>setShowCheckout(true)}>Proceed</button>
                         </div> 
@@ -54,7 +55,7 @@ const Cart = ({cartItems, removeCart}) => {
                 }
                 {
                     showCheckout && (
-                        <div className="form-container">
+                        <div className="form-container animate__animated animate__fadeInUp">
                             <form action="" onSubmit={submitHandler}>
                                 <label htmlFor="">Email:</label>
                                 <input type="email" name="email" id="" required value={values.email || ''} onChange={handleChange}/>
