@@ -7,26 +7,20 @@ import Filter from './components/filter/filter';
 import Cart from './components/cart/cart';
 import 'animate.css';
 import { useSelector } from 'react-redux';
-import { allProducts } from './redux/features/productSlice';
+import { allProducts, filterSize } from './redux/features/productSlice';
 
 const App = () => {
     let products = useSelector(allProducts);
-
     const [size, setSize] = useState('');
     const [sort, setSort] = useState('latest');
     const [cartItems, setCartItems] = useState(localStorage.getItem('cartItems')? JSON.parse(localStorage.getItem('cartItems')):[]);
     
 
-    const filterSizeHandler = (e)=>{
-        if(e.target.value ===''){
-            // setProduct(products);
-            setSize(e.target.value);
-        }else{
-            setSize(e.target.value);
-            // setProduct(products.filter(p => p.sizes.indexOf(e.target.value) >= 0));
-            products = products.filter(p => p.sizes.indexOf(e.target.value) >= 0);
-        }
-    }
+    // const filterSizeHandler = (e)=>{
+    //     setSize(e.target.value);
+    // }
+    
+    // products = useSelector(state => filterSize(state, e.target.value));
     
     const sortHandler = (e)=>{
         setSort(e.target.value);
