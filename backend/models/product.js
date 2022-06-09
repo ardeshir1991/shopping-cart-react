@@ -7,7 +7,8 @@ const productSchema = new mongoose.Schema({
     image:String,
     description:String,
     sizes:[String],
-    price:Number
+    price:Number,
+    deleted:{type: Boolean, default: false}
 });
 
 productSchema.plugin(timestamp);
