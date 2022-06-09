@@ -5,7 +5,7 @@ module.exports = class {
         this.Product = Product;
     }
     showProduct = async(req,res)=>{
-        const products = await Product.find({});
+        const products = await Product.find({deleted:false});
         res.status(200).json({data: products, message:'ok'});
     }
     createProduct = async(req,res)=>{
@@ -14,7 +14,8 @@ module.exports = class {
         res.status(200).json({data:newProduct, message:'ok'});
     }
     deleteProduct = async(req,res)=>{
-        const product = await Product.findByIdAndDelete(req.params.id);
-        res.status(200).json({data:product, message:'ok'});
+        await Product.findByIdAndUpdate(req.params.id,{deleted:true});
+        const products = await Product.find({deleted: false});
+        res.status(200).json({data:products, message:'ok'});
     }
 }

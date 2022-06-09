@@ -1,36 +1,44 @@
 //some changes
 import './app.scss';
-import data from './assets/data.json';
+// import data from './assets/data.json';
 import { useState } from 'react';
 import Product from './components/products/Products';
 import Filter from './components/filter/filter';
 import Cart from './components/cart/cart';
 import 'animate.css';
+import { useSelector } from 'react-redux';
+import { allProducts } from './redux/features/productSlice';
 
 const App = () => {
-    const [products, setProduct] = useState(data.products);
+    let products = useSelector(allProducts);
+
     const [size, setSize] = useState('');
     const [sort, setSort] = useState('latest');
     const [cartItems, setCartItems] = useState(localStorage.getItem('cartItems')? JSON.parse(localStorage.getItem('cartItems')):[]);
+    
 
     const filterSizeHandler = (e)=>{
-        if(e.target.value ==''){
-            setProduct(data.products);
+        if(e.target.value ===''){
+            // setProduct(products);
             setSize(e.target.value);
         }else{
             setSize(e.target.value);
-            setProduct(data.products.filter(p => p.sizes.indexOf(e.target.value) >= 0));
+            // setProduct(products.filter(p => p.sizes.indexOf(e.target.value) >= 0));
+            products = products.filter(p => p.sizes.indexOf(e.target.value) >= 0);
         }
     }
     
     const sortHandler = (e)=>{
         setSort(e.target.value);
         if(e.target.value==='latest'){
-            setProduct(products.sort((a,b)=> b._id - a._id));
+            // setProduct(products.sort((a,b)=> b._id - a._id));
+            products = products.sort((a,b)=> b._id - a._id);
         }else if(e.target.value==='lowest'){
-            setProduct(products.sort((a,b)=> a.price - b.price));
+            // setProduct(products.sort((a,b)=> a.price - b.price));
+            products = products.sort((a,b)=> a.price - b.price);
         }else{
-            setProduct(products.sort((a,b)=> b.price - a.price ));
+            // setProduct(products.sort((a,b)=> b.price - a.price ));
+            products = products.sort((a,b)=> b.price - a.price );
         }
     }
 

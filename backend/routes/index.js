@@ -6,6 +6,6 @@ const productController = new controller();
 
 router.get('/products', productController.showProduct);
 router.post('/products', productController.createProduct);
-router.delete('/product/:id', productController.deleteProduct)
+router.put('/product/:id', productController.deleteProduct);
 
 module.exports=router;
