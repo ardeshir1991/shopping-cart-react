@@ -11,7 +11,7 @@ export const getProducts = createAsyncThunk('products/getProducts', async()=>{
 })
 
 
-export const productSlice = createSlice({
+export const productSlice = createSlice({ 
     name:'products',
     initialState:{
         products:[],
@@ -33,6 +33,14 @@ export const productSlice = createSlice({
 });
 
 export const allProducts = state => state.products.products;
+export const filterSize = (state, size)=>{
+    if(!size){
+        return state.products.products;
+    }else if(size){
+        return state.products.products.filter(p => p.sizes.includes(size));
+        
+    }
+}
 
 // export const filterSize = (state, size) => {
 //     console.log(size)

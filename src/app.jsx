@@ -11,7 +11,6 @@ import { allProducts, filterSize, sortProducts, filterProducts } from './redux/f
 
 const App = () => {
     let products = useSelector(allProducts);
-
     const [size, setSize] = useState('');
     const [sort, setSort] = useState('latest');
     const [cartItems, setCartItems] = useState(localStorage.getItem('cartItems')? JSON.parse(localStorage.getItem('cartItems')):[]);
