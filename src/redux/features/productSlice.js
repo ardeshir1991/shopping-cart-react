@@ -42,5 +42,48 @@ export const filterSize = (state, size)=>{
     }
 }
 
+// export const filterSize = (state, size) => {
+//     console.log(size)
+//     if(!size){
+//         return state.products.products;
+//     }else{
+//         console.log(state.products.products.filter(product => product.sizes.includes(size)))
+//         return state.products.products.filter(product => product.sizes.includes(size));
+//     }
+// }
+
+export const filterProducts = (state, size, sort) => {
+    let products =  [...state.products.products];
+    if(!size){
+        if(sort === 'latest'){
+            return products.sort((a,b)=> a.updatedAt - b.updatedAt);
+        }else if(sort === 'lowest'){
+            return products.sort((a,b)=> a.price - b.price);
+        }else {
+            return products.sort((a,b)=> b.price - a.price);
+        }
+    }else if(size){
+        products = state.products.products.filter(product => product.sizes.includes(size));
+        if(sort === 'latest'){
+            return products.sort((a,b)=> a.updatedAt - b.updatedAt);
+        }else if(sort === 'lowest'){
+            return products.sort((a,b)=> a.price - b.price);
+        }else {
+            return products.sort((a,b)=> b.price - a.price);
+        }
+    }
+}
+
+// export const sortProducts = (state, sort) =>{
+//     const products =  [...state.products.products];
+//     if(sort === 'latest'){
+//         return products.sort((a,b)=> a.updatedAt - b.updatedAt);
+//     }else if(sort === 'lowest'){
+//         return products.sort((a,b)=> a.price - b.price);
+//     }else {
+//         return products.sort((a,b)=> b.price - a.price);
+//     }
+// }
+
 
 export default productSlice.reducer;
