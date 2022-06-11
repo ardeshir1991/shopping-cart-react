@@ -1,6 +1,6 @@
 import './filter.scss';
 
-const Filter = ({count,size,order,filterSize,sortProducts}) => {
+const Filter = ({count,size,filterSize,sortProducts,order}) => {
     return ( 
         <div className="filter">
             <div className="filter-result">{count} Products</div>

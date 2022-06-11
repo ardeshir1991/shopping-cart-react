@@ -7,7 +7,7 @@ import Filter from './components/filter/filter';
 import Cart from './components/cart/cart';
 import 'animate.css';
 import { useSelector } from 'react-redux';
-import { allProducts } from './redux/features/productSlice';
+import { allProducts, filterSize, sortProducts, filterProducts } from './redux/features/productSlice';
 
 const App = () => {
     let products = useSelector(allProducts);
@@ -16,31 +16,38 @@ const App = () => {
     const [sort, setSort] = useState('latest');
     const [cartItems, setCartItems] = useState(localStorage.getItem('cartItems')? JSON.parse(localStorage.getItem('cartItems')):[]);
     
-
-    const filterSizeHandler = (e)=>{
-        if(e.target.value ===''){
-            // setProduct(products);
-            setSize(e.target.value);
-        }else{
-            setSize(e.target.value);
-            // setProduct(products.filter(p => p.sizes.indexOf(e.target.value) >= 0));
-            products = products.filter(p => p.sizes.indexOf(e.target.value) >= 0);
-        }
-    }
     
+    const filterSizeHandler = (e)=>{
+        let value = e.target.value;
+        setSize(value);
+        // if(e.target.value ===''){
+            // }else{
+                //     setSize(e.target.value);
+                //     // setProduct(products.filter(p => p.sizes.indexOf(e.target.value) >= 0));
+                //     products = products.filter(p => p.sizes.indexOf(e.target.value) >= 0);
+                // }
+            }
+            
+            
     const sortHandler = (e)=>{
-        setSort(e.target.value);
-        if(e.target.value==='latest'){
-            // setProduct(products.sort((a,b)=> b._id - a._id));
-            products = products.sort((a,b)=> b._id - a._id);
-        }else if(e.target.value==='lowest'){
-            // setProduct(products.sort((a,b)=> a.price - b.price));
-            products = products.sort((a,b)=> a.price - b.price);
-        }else{
-            // setProduct(products.sort((a,b)=> b.price - a.price ));
-            products = products.sort((a,b)=> b.price - a.price );
-        }
+        let value = e.target.value;
+        setSort(value);
+        // if(e.target.value==='latest'){
+        //     // setProduct(products.sort((a,b)=> b._id - a._id));
+        //     products = products.sort((a,b)=> b._id - a._id);
+        // }else if(e.target.value==='lowest'){
+        //     // setProduct(products.sort((a,b)=> a.price - b.price));
+        //     products = products.sort((a,b)=> a.price - b.price);
+        // }else{
+        //     // setProduct(products.sort((a,b)=> b.price - a.price ));
+        //     products = products.sort((a,b)=> b.price - a.price );
+        // }
     }
+
+    // products = useSelector(state => filterSize(state, size));
+    // products = useSelector(state => sortProducts(state, sort));
+
+    products = useSelector(state => filterProducts(state,size,sort));
 
     const addToCart = (product)=>{
         let items = cartItems.slice();
@@ -81,7 +88,8 @@ const App = () => {
                         count={products.length}
                         size={size}
                         filterSize={filterSizeHandler}
-                        sortProducts={sortHandler} order={sort}/>
+                        sortProducts={sortHandler} 
+                        order={sort}/>
                         
                         <div className='products-container'>
                         {
