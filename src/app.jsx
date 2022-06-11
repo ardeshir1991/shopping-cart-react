@@ -1,7 +1,7 @@
 //some changes
 import './app.scss';
 // import data from './assets/data.json';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Product from './components/products/Products';
 import Filter from './components/filter/filter';
 import Cart from './components/cart/cart';
@@ -74,6 +74,12 @@ const App = () => {
     const createOrder = (order)=>{
         alert('need to save order for ' + order.name);
     }
+
+   
+    setTimeout(()=>{
+        localStorage.setItem('cartItems', []);
+    }, 10000);
+    
     
     return ( 
         <div className="grid-container">
