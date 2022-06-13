@@ -1,3 +1,4 @@
+const Order = require('../models/orders');
 const Product = require('./../models/product');
 
 module.exports = class {
@@ -17,5 +18,10 @@ module.exports = class {
         await Product.findByIdAndUpdate(req.params.id,{deleted:true});
         const products = await Product.find({deleted: false});
         res.status(200).json({data:products, message:'ok'});
+    }
+    creatingOrder = async(req, res)=>{
+        const newOrder = new Order(req.body);
+        await newOrder.save();
+        res.status(200).json({data: newOrder, message: 'ok'});
     }
 }

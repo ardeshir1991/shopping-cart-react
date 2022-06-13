@@ -1,28 +1,54 @@
 import './cart.scss';
 import currencyFormat from '../../hooks/currencyFormat';
 import { useState } from 'react';
-import useForm from '../../hooks/useForm';
 import 'animate.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { createOrders, showOrder } from '../../redux/features/orderSlice';
+import Modal from 'react-modal';
 
 const Cart = ({cartItems, removeCart}) => {
+    const customStyles = {
+        content: {
+          top: '50%',
+          left: '50%',
+          right: 'auto',
+          bottom: 'auto',
+          marginRight: '-50%',
+          transform: 'translate(-50%, -50%)',
+          height: '45%',
+          width: '50%'
+        }
+    };
+
+    const dispatch = useDispatch();
     const [showCheckout, setShowCheckout] = useState(false);
-    const {values, handleChange, submitHandler} = useForm(cartItems);
+    // const {values, handleChange, submitHandler} = useForm(cartItems);
 
-    // const inputHandler = (e)=>{
-    //     setFormInfo(values => ({...values,[e.target.name]: e.target.value}));
-    // }
+    const [email, setEmail] = useState('');
+    const [name, setName] = useState('');
+    const [address, setAddress] = useState('');
+    const [modal, setModal] = useState(false);
 
-    // const createOrderHandler = (e)=>{
-    //     e.preventDefault();
-    //     const order = {
-    //         email:values.email,
-    //         name: values.name,
-    //         address: values.address,
-    //         cartItems
-    //     };
-    //     createOrder(order);
-    //     // alert('Your order under name of '+ order.name);
-    // }
+    const products = [];
+    cartItems.map(item => products.push({productId: item._id, price: item.price, count: item.count}));
+
+    const submitHandler = (e)=>{
+        e.preventDefault();
+        dispatch(createOrders({
+            products,
+            name,
+            email,
+            address,
+            total:cartItems.reduce((total,num)=> total + num.price * num.count, 0)
+        }));
+        setName('');
+        setEmail('');
+        setAddress('');
+        setModal(true);
+        localStorage.clear('cartItems');
+    }
+    
+    const order = useSelector(showOrder); 
 
     return ( 
         <div className='cart-container'>
@@ -58,14 +84,53 @@ const Cart = ({cartItems, removeCart}) => {
                         <div className="form-container animate__animated animate__fadeInUp">
                             <form action="" onSubmit={submitHandler}>
                                 <label htmlFor="">Email:</label>
-                                <input type="email" name="email" id="" required value={values.email || ''} onChange={handleChange}/>
+                                <input type="email" name="email" id="" required value={email} onChange={(e)=>setEmail(e.target.value)}/>
                                 <label htmlFor="">Name:</label>
-                                <input type="text" name="name" id="" required value={values.name || ''} onChange={handleChange}/>
+                                <input type="text" name="name" id="" required value={name} onChange={(e)=>setName(e.target.value)}/>
                                 <label htmlFor="">Address:</label>
-                                <input type="text" name="address" id="" required value={values.address || ''} onChange={handleChange}/>
+                                <input type="text" name="address" id="" required value={address} onChange={(e)=>setAddress(e.target.value)}/>
                                 <input type="submit" value="Checkout" className='submit'/>
                             </form>
                         </div>
+                    )
+                }
+                {
+                    modal && order &&(
+                        <Modal 
+                        isOpen={modal}
+                        onRequestClose={()=>setModal(false)}
+                        style={customStyles}>
+                            <div className="showOrder animate__animated animate__zoomIn">
+                                <button className="close" onClick={()=>setModal(false)}>&times;</button>
+                                <h3>Congratulations, Your order has been registered</h3>
+                                <ul>
+                                    <li>
+                                        <span>Order ID:</span>
+                                        <span>{order._id}</span>
+                                    </li>
+                                    <li>
+                                        <span>Username:</span>
+                                        <span>{order.name}</span>
+                                    </li>
+                                    <li>
+                                        <span>Email:</span>
+                                        <span>{order.email}</span>
+                                    </li>
+                                    <li>
+                                        <span>Address:</span>
+                                        <span>{order.address}</span>
+                                    </li>
+                                    <li>
+                                        <span>Total:</span>
+                                        <span>{currencyFormat(order.total)}</span>
+                                    </li>
+                                    <li>
+                                        <span>CreatedAt:</span>
+                                        <span>{order.createdAt}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </Modal>
                     )
                 }
         </div>

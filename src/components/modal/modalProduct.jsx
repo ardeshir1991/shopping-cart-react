@@ -11,7 +11,7 @@ const ModalProduct = ({product, isClosed, isOpen, addToCart}) => {
           bottom: 'auto',
           marginRight: '-50%',
           transform: 'translate(-50%, -50%)',
-          height: '80%',
+          height: '50%',
           width: '80%'
         },
       };

@@ -7,5 +7,6 @@ const productController = new controller();
 router.get('/products', productController.showProduct);
 router.post('/products', productController.createProduct);
 router.put('/product/:id', productController.deleteProduct);
+router.post('/orders', productController.creatingOrder);
 
 module.exports=router;
