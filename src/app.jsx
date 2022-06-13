@@ -1,13 +1,13 @@
 //some changes
 import './app.scss';
 // import data from './assets/data.json';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Product from './components/products/Products';
 import Filter from './components/filter/filter';
 import Cart from './components/cart/cart';
 import 'animate.css';
 import { useSelector } from 'react-redux';
-import { allProducts, filterSize, sortProducts, filterProducts } from './redux/features/productSlice';
+import { allProducts, filterProducts } from './redux/features/productSlice';
 
 const App = () => {
     let products = useSelector(allProducts);
@@ -78,7 +78,7 @@ const App = () => {
    
     setTimeout(()=>{
         localStorage.setItem('cartItems', []);
-    }, 10000);
+    }, 100000);
     
     
     return ( 
